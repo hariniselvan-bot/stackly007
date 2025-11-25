@@ -6,7 +6,10 @@
   <title>Stackly about</title>
 
   <!-- Tailwind (CDN) -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com">
+    
+  </script>
+  
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
@@ -82,6 +85,28 @@ body {
   .xl2\:hidden {
     display: none !important;
   }
+  /* Make hero box responsive */
+.hero-box {
+    width: 90%;
+    max-width: 380px;      /* keeps same size as screenshot */
+    padding: 30px 20px;    /* balanced spacing */
+    margin: 0 auto;        /* center it */
+}
+
+/* Mobile optimization */
+@media (max-width: 480px) {
+    .hero-box {
+        width: 92%;
+        padding: 25px 18px;
+        border-width: 1.5px;   /* makes border visible on mobile */
+    }
+}
+.active-link {
+    color: #22d3ee !important;   /* cyan-400 */
+    font-weight: 700 !important; /* bold */
+  }
+
+
 }
   </style>
 </head>
@@ -100,16 +125,17 @@ body {
     <!-- DESKTOP MENU (only visible above 1117px) -->
     <nav class="hidden xl2:flex gap-8 font-semibold items-center text-white">
       <div class="relative group">
-        <button class="hover:text-cyan-400 flex items-center gap-1">
-          Home
-          <i class="fa-solid fa-chevron-down text-xs"></i>
-        </button>
+  <a href="index.html" class="hover:text-cyan-400 flex items-center gap-1 nav-link">
+    Home
+    <i class="fa-solid fa-chevron-down text-xs"></i>
+  </a>
 
-        <div class="absolute bg-black shadow-lg rounded-lg hidden group-hover:block 
-             w-36 top-full pt-3 z-50">
-          <a href="home2.html" class="block px-4 py-2 hover:bg-gray-800 nav-link">Home 2</a>
-        </div>
-      </div>
+  <div class="absolute bg-black shadow-lg rounded-lg hidden group-hover:block 
+       w-36 top-full pt-3 z-50">
+    <a href="home2.html" class="block px-4 py-2 hover:bg-gray-800 nav-link">Home 2</a>
+  </div>
+</div>
+
 
       <a href="about.html" class="nav-link hover:text-cyan-400">About</a>
       <a href="services.html" class="nav-link hover:text-cyan-400">Services</a>
@@ -153,20 +179,24 @@ body {
 <section class="relative w-full h-[80vh] hero-zoom bg-cover bg-center flex items-center justify-center"
   style="background:url('about.webp') center/cover no-repeat; padding-top:80px;">
   
-  <!-- Dark overlay so text is readable -->
-  <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+  <!-- Dark overlay -->
+  <div class="absolute inset-0 bg-black bg-opacity-40 z-10"></div>
 
-  <!-- White border box -->
-  <div class="relative border border-white px-14 py-10 text-center rounded-md">
-    <h1 data-animate class="text-5xl md:text-6xl font-extrabold text-white drop-shadow-lg">
-      About <span class="text-cyan-400">Stackly</span>
-    </h1>
+  <!-- OUTLINE BOX (great on mobile) -->
+  <div class="relative z-20 border-2 border-white/80 rounded-md 
+            px-6 py-6 text-center w-full max-w-[90%] mx-6">
+  <h1 class="text-5xl md:text-6xl font-extrabold text-white drop-shadow-lg">
+    About <span class="text-cyan-400">Stackly</span>
+  </h1>
 
-    <p data-animate class="mt-4 text-lg text-gray-200 max-w-xl mx-auto">
-      Empowering businesses with full-stack IT excellence — software, cloud, security, and beyond.
-    </p>
-  </div>
+  <p class="mt-4 text-lg text-gray-200">
+    Empowering businesses with full-stack IT excellence — software, cloud, security, and beyond.
+  </p>
+</div>
+
+
 </section>
+
 
 
 <!-- ====================================== WHO WE ARE (HOME STYLE) ====================================== -->
@@ -441,6 +471,18 @@ document.addEventListener("click", function (e) {
 function toggleMobileDrop() {
   document.getElementById("mobileHomeDrop").classList.toggle("hidden");
 }
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const currentPage = window.location.pathname.split("/").pop();
+    const links = document.querySelectorAll(".nav-link");
+
+    links.forEach(link => {
+      if (link.getAttribute("href") === currentPage) {
+        link.classList.add("active-link");
+      }
+    });
+  });
 </script>
 
 </html>
