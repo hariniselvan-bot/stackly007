@@ -77,14 +77,15 @@ nav .group a:hover {
 /* LOGIN BUTTON */
 nav a.bg-blue-600 {
   background: #00cccc !important;
-  color: black !important;
+  color: rgb(0, 0, 0) !important;
   font-weight: 600;
   transition: .3s ease;
 }
 
 nav a.bg-blue-600:hover {
   background: #00a3a3 !important;
-  box-shadow: 0 0 12px #00e6e6;
+  
+  box-shadow: 0 0 12px #ffffff;
 }
 
 /* ------------------------------ */
@@ -170,6 +171,11 @@ nav a.bg-blue-600:hover {
 body {
   padding-top: 100px; /* adjust height based on your header size */
 }
+.active {
+  color: #00e6e6 !important;
+  font-weight: 700 !important;
+  text-shadow: 0 0 10px #00e6e6;
+}
 
   </style>
 </head>
@@ -188,10 +194,15 @@ body {
     <!-- DESKTOP MENU (only visible above 1117px) -->
     <nav class="hidden xl2:flex gap-8 font-semibold items-center text-white">
       <div class="relative group">
-        <button class="hover:text-cyan-400 flex items-center gap-1">
+         <a href="index.html" class="hover:text-cyan-400 flex items-center gap-1 nav-link">
           Home
           <i class="fa-solid fa-chevron-down text-xs"></i>
-        </button>
+        </a>
+
+        <div class="absolute bg-black shadow-lg rounded-lg hidden group-hover:block 
+             w-36 top-full pt-3 z-50">
+          <a href="home2.html" class="block px-4 py-2 hover:bg-gray-800 nav-link">Home 2</a>
+        </div>
 
         <div class="absolute bg-black shadow-lg rounded-lg hidden group-hover:block 
              w-36 top-full pt-3 z-50">
@@ -202,11 +213,16 @@ body {
       <a href="about.html" class="nav-link hover:text-cyan-400">About</a>
       <a href="services.html" class="nav-link hover:text-cyan-400">Services</a>
       <a href="aboutus.html" class="nav-link hover:text-cyan-400">Dashboard</a>
-      <a href="contact.html" class="nav-link hover:text-cyan-400">Contact</a>
+<a href="contact.html" class="nav-link text-cyan-400 font-bold">Contact</a>
 
-      <a href="login.html" class="px-5 py-2 bg-cyan-500 text-black rounded-lg hover:bg-cyan-400 nav-link">
-        Login
-      </a>
+      <a href="login.html"
+   style="color: black !important;"
+   class="px-5 py-2 bg-cyan-500 rounded-lg hover:bg-cyan-400 nav-link">
+  Login
+</a>
+
+</a>
+
     </nav>
 
     <!-- MOBILE HAMBURGER (visible up to 1117px) -->
@@ -254,6 +270,7 @@ body {
         padding: 0;
         color: white;
     }
+    
     /* Custom breakpoint: show desktop menu only at ≥1117px */
 @media (min-width: 1117px) {
   .xl2\:flex {
@@ -535,3 +552,22 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
   </div>
 
 </footer>
+
+<style>
+  .active-link {
+    color: #22d3ee !important;   /* cyan-400 */
+    font-weight: 700 !important; /* bold */
+  }
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const currentPage = window.location.pathname.split("/").pop();
+    const links = document.querySelectorAll(".nav-link");
+
+    links.forEach(link => {
+      if (link.getAttribute("href") === currentPage) {
+        link.classList.add("active-link");
+      }
+    });
+  });
+</script>
