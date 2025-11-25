@@ -93,9 +93,8 @@ body {
 
     <!-- LOGO -->
     <a href="index.html" class="flex items-center gap-3">
-      <img src="stackly.webp" class="w-10 h-10 object-contain" alt="Stackly logo">
-      <span class="font-bold text-xl text-white">STACKLY</span>
-    </a>
+  <img src="stackly.webp" class="w-40 h-40 object-contain" alt="Stackly logo">
+</a>
 
     <!-- DESKTOP MENU (only visible above 1117px) -->
     <nav class="hidden xl2:flex gap-8 font-semibold items-center text-white">
@@ -113,8 +112,11 @@ body {
 
 <a href="about.html" class="nav-link hover:text-cyan-400">About</a>
 <a href="services.html" class="nav-link hover:text-cyan-400">Services</a>
-<a href="aboutus.html" class="nav-link hover:text-cyan-400">Dashboard</a>
-<a href="contact.html" class="nav-link hover:text-cyan-400">Contact</a>
+<a href="aboutus.html"
+   class="nav-link"
+   style="color: #22d3ee !important; font-weight: 700 !important;">
+  Dashboard
+</a><a href="contact.html" class="nav-link hover:text-cyan-400">Contact</a>
 
 <a href="login.html" class="px-5 py-2 bg-cyan-500 text-black rounded-lg hover:bg-cyan-400 nav-link">
   Login
@@ -412,17 +414,5 @@ function toggleMobileDrop() {
     font-weight: 700 !important; /* bold */
   }
 </style>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const currentPage = window.location.pathname.split("/").pop();
-    const links = document.querySelectorAll(".nav-link");
-
-    links.forEach(link => {
-      if (link.getAttribute("href") === currentPage) {
-        link.classList.add("active-link");
-      }
-    });
-  });
-</script>
 
 </html>
