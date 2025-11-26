@@ -119,10 +119,11 @@ body {
     <!-- DESKTOP MENU (only visible above 1117px) -->
     <nav class="hidden xl2:flex gap-8 font-semibold items-center text-white">
       <div class="relative group">
-        <button class="hover:text-cyan-400 flex items-center gap-1">
+        <a href="index.html" class="hover:text-cyan-400 flex items-center gap-1 nav-link">
           Home
           <i class="fa-solid fa-chevron-down text-xs"></i>
-        </button>
+        </a>
+         
 
         <div class="absolute bg-black shadow-lg rounded-lg hidden group-hover:block 
              w-36 top-full pt-3 z-50">
@@ -272,93 +273,94 @@ body {
 </head>
 
 <body>
-
 <div class="login-box">
     <h1 class="text-3xl font-semibold mb-8 tracking-wide">LOGIN</h1>
 
+    <!-- USERNAME INPUT -->
     <div class="input-group">
         <input id="username" type="text" placeholder="USERNAME">
         <span class="icon"><i class="fas fa-user"></i></span>
+
+        <!-- Inline warning -->
+        <div id="warnUser" class="warning">
+            <i class="fas fa-exclamation-triangle"></i> Please enter your username
+        </div>
     </div>
 
+    <!-- PASSWORD INPUT -->
     <div class="input-group">
         <input id="password" type="password" placeholder="PASSWORD">
         <span class="icon"><i class="fas fa-key"></i></span>
+
+        <!-- Inline warning -->
+        <div id="warnPass" class="warning">
+            <i class="fas fa-exclamation-triangle"></i> Please enter your password
+        </div>
     </div>
 
-    <button type="button" class="login-btn" onclick="validateLogin()">LOGIN</button>
+    <button type="button" class="login-btn" onclick="validateLogin()">SIGN IN</button>
 
     <div class="extras">
-    <a href="signup.html">New here? Sign up</a>
-    <a href="404.html">Forgot password?</a>
+        <a href="signup.html">New here? Sign up</a>
+        <a href="404.html">Forgot password?</a>
+    </div>
 </div>
 
-</div>
+<style>
+/* Inline warning style (same as your signup page) */
+.warning {
+    color: #ffcc00;
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
+}
+</style>
 
 <script>
 function validateLogin() {
     let user = document.getElementById("username").value.trim();
     let pass = document.getElementById("password").value.trim();
 
-    if (user === "" || pass === "") {
-        alert("Please fill all fields");
-        return;
+    let warnUser = document.getElementById("warnUser");
+    let warnPass = document.getElementById("warnPass");
+
+    let valid = true;
+
+    // USERNAME VALIDATION
+    if (user === "") {
+        warnUser.style.display = "block";
+        valid = false;
+    } else {
+        warnUser.style.display = "none";
     }
 
-    // Redirect to 404 page
-    window.location.href = "404.html";
+    // PASSWORD VALIDATION
+    if (pass === "") {
+        warnPass.style.display = "block";
+        valid = false;
+    } else {
+        warnPass.style.display = "none";
+    }
+
+    // If all fields good → redirect
+    if (valid) {
+        window.location.href = "404.html";
+    }
 }
 </script>
 
-</body>
-</html>
- 
-<!-- CLEAN JS (ONLY ONE SCRIPT) -->
-  <script>
-    const btn = document.getElementById("hamburgerBtn");
-    const menu = document.getElementById("mobileMenu");
-
-    btn.addEventListener("click", () => {
-      menu.classList.toggle("hidden");
-      document.body.style.overflow = menu.classList.contains("hidden") ? "auto" : "hidden";
-    });
-
-    const elements = document.querySelectorAll("[data-animate]");
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add("visible");
-      });
-    }, { threshold: 0.2 });
-
-    elements.forEach((el) => observer.observe(el));
-  </script>
-
-
-</body>
 <script>
-/* ================= DESKTOP DROPDOWN ================= */
-const desktopHomeBtn   = document.getElementById("desktopHomeBtn");
-const desktopHomePanel = document.getElementById("desktopHomePanel");
-const desktopWrap      = document.getElementById("desktopHomeWrap");
+  const hamburgerBtn = document.getElementById("hamburgerBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
 
-desktopHomeBtn.addEventListener("click", () => {
-  const open = desktopHomePanel.classList.contains("hidden");
-  desktopHomePanel.classList.toggle("hidden", !open);
-  desktopHomeBtn.setAttribute("aria-expanded", open);
-});
-
-/* Close dropdown when clicking outside */
-document.addEventListener("click", function (e) {
-  if (!desktopWrap.contains(e.target)) {
-    desktopHomePanel.classList.add("hidden");
-    desktopHomeBtn.setAttribute("aria-expanded", "false");
-  }
-});
-
-/* ================= MOBILE DROPDOWN ================= */
-function toggleMobileDrop() {
-  document.getElementById("mobileHomeDrop").classList.toggle("hidden");
+  hamburgerBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+  });
+  function toggleMobileDrop() {
+  const drop = document.getElementById("mobileHomeDrop");
+  drop.classList.toggle("hidden");
 }
-</script>
 
+</script>
+</body>
 </html>
