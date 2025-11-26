@@ -117,13 +117,13 @@ body {
 </a>
 
 
-    <!-- DESKTOP MENU (only visible above 1117px) -->
+  <!-- DESKTOP MENU (only visible above 1117px) -->
     <nav class="hidden xl2:flex gap-8 font-semibold items-center text-white">
       <div class="relative group">
-        <button class="hover:text-cyan-400 flex items-center gap-1">
+        <a href="index.html" class="hover:text-cyan-400 flex items-center gap-1 nav-link">
           Home
           <i class="fa-solid fa-chevron-down text-xs"></i>
-        </button>
+        </a>
 
         <div class="absolute bg-black shadow-lg rounded-lg hidden group-hover:block 
              w-36 top-full pt-3 z-50">
@@ -167,6 +167,7 @@ body {
       <a href="login.html" class="text-cyan-300 font-semibold mt-2">Login</a>
     </div>
   </nav>
+<main class="pt-32">
 
 <!DOCTYPE html>
 <html lang="en">
@@ -269,6 +270,20 @@ body {
     .extras a:hover {
         text-decoration: underline;
     }
+  .error-text {
+    color: #ff9900; 
+    font-size: 14px;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.error-text i {
+    font-size: 16px;
+}
+
+
 </style>
 </head>
 
@@ -280,21 +295,26 @@ body {
     <div class="input-group">
         <input id="name" type="text" placeholder="FULL NAME">
         <span class="icon"><i class="fas fa-user"></i></span>
+        <p id="nameErr" class="error-text"></p>
     </div>
 
     <div class="input-group">
         <input id="email" type="email" placeholder="EMAIL">
         <span class="icon"><i class="fas fa-envelope"></i></span>
+        <p id="emailErr" class="error-text"></p>
     </div>
 
     <div class="input-group">
         <input id="password" type="password" placeholder="PASSWORD">
         <span class="icon"><i class="fas fa-lock"></i></span>
+        <p id="passErr" class="error-text"></p>
     </div>
 
+    <!-- ✅ FIXED: CONFIRM PASSWORD FIELD -->
     <div class="input-group">
         <input id="cpassword" type="password" placeholder="CONFIRM PASSWORD">
         <span class="icon"><i class="fas fa-lock"></i></span>
+        <p id="cpassErr" class="error-text"></p>
     </div>
 
     <button class="signup-btn" onclick="submitSignup()">SIGN UP</button>
@@ -387,4 +407,63 @@ function toggleMobileDrop() {
 }
 </script>
 
-</html>
+
+</html><script>
+function submitSignup() {
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let pass = document.getElementById("password").value.trim();
+    let cpass = document.getElementById("cpassword").value.trim();
+
+    let nameErr  = document.getElementById("nameErr");
+    let emailErr = document.getElementById("emailErr");
+    let passErr  = document.getElementById("passErr");
+    let cpassErr = document.getElementById("cpassErr");
+
+    // Clear previous errors
+    nameErr.innerHTML = "";
+    emailErr.innerHTML = "";
+    passErr.innerHTML = "";
+    cpassErr.innerHTML = "";
+
+    let error = false;
+
+    if (name === "") {
+        nameErr.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Please enter your name`;
+        error = true;
+    }
+
+    if (email === "") {
+        emailErr.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Please enter your email`;
+        error = true;
+    } else {
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+        if (!emailPattern.test(email)) {
+            emailErr.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Enter a valid Gmail`;
+            error = true;
+        }
+    }
+
+    if (pass === "") {
+        passErr.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Please enter a password`;
+        error = true;
+    }
+
+    if (cpass === "") {
+        cpassErr.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Please confirm password`;
+        error = true;
+    } else if (cpass !== pass) {
+        cpassErr.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Passwords do not match`;
+        error = true;
+    }
+
+    // ❌ If errors → stop
+    if (error) return;
+
+    // ✅ All good → redirect
+    window.location.href = "404.html";
+}
+</script>
+
+
+</script>
